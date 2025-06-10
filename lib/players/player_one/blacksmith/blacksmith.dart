@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_gbb_demo/game/enum/one_time_animations.dart';
 import 'package:projeto_gbb_demo/game/controller/game_controller.dart';
-import 'package:projeto_gbb_demo/players/player_one/blacksmith/hammer.dart';
 import 'package:projeto_gbb_demo/players/player_one/player_one_animations.dart';
 
 import '../../../game/enum/character_faction.dart';
@@ -17,16 +17,18 @@ import 'package:bonfire/player/lit_player.dart';
   static Vector2 characterHitbox = Vector2(96, 40);
 */
 
-class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
+class BlacksmithClass extends LitPlayer with BlockMovementCollision {
   Function onHit;
   double playerLife;
   PlayerOneAnimations playerOneAnimations = PlayerOneAnimations();
 
   // control booleans:
   bool dashReady = true;
+  bool attackReady = true;
+  bool holdingArrow = false;
 
-  bool escPressed = false;
-  bool isArmed = false;
+  int arrowStrength = 0;
+
   LocalGameController localGameController;
 
   bool _isPlayingOneTimeAnimation = false;
@@ -77,37 +79,69 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
   }
 
   void swordsmanHitSet(JoystickActionEvent event) {
-    if (event.id.keyId == LogicalKeyboardKey.keyZ.keyId) {
-      hammerAttack(event);
+    if ((event.id.keyId == LogicalKeyboardKey.keyZ.keyId) && attackReady) {
+      if (event.event == ActionEvent.DOWN) {
+        holdingArrow = true;
+        Future.delayed(Duration(seconds: 1), () {
+          increasePullStrength();
+        });
+      } else {
+        releaseArrow();
+      }
+
+      // simpleAttackRangeByDirection(animationRight: GameSpriteSheet.arrowHorizontalRight,
+      //   attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
+      //   direction: lastDirection,
+      //   size: Vector2(155,95),
+      //   speed: 2000,
+      //   centerOffset: Vector2(0, -60)
+      // );
+      attackReady = false;
+      Future.delayed(const Duration(seconds: 2), () {
+        attackReady = true;
+      });
     }
     if (event.id.keyId == LogicalKeyboardKey.keyX.keyId &&
         dashReady &&
         !_isPlayingOneTimeAnimation) {
       swordsmanDash();
     }
-    if (event.id == LogicalKeyboardKey.escape.keyId && !escPressed) {
-      localGameController.togglePaused();
-      escPressed = true;
-      if (localGameController.gameIsPaused) {
-        gameRef.pauseEngine();
-      } else {
-        gameRef.resumeEngine();
+  }
+
+  void increasePullStrength() {
+    if (holdingArrow) {
+      print("current strength: $arrowStrength");
+      if (arrowStrength < 3) {
+        arrowStrength++;
+        Future.delayed(Duration(seconds: 1), () {
+          increasePullStrength();
+        });
       }
-      Future.delayed(const Duration(milliseconds: 250), () {
-        escPressed = false;
-      });
     }
+  }
+
+  void releaseArrow() {
+    simpleAttackRangeByDirection(
+        animationRight: GameSpriteSheet.arrowHorizontalRight,
+        damage: (5 * arrowStrength).toDouble(),
+        attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
+        direction: lastDirection,
+        size: Vector2(155, 95),
+        speed: (1000 * arrowStrength).toDouble(),
+        centerOffset: Vector2(0, -60));
+    arrowStrength = 0;
+    holdingArrow = false;
   }
 
   void swordsmanDash() {
     simpleAttackMelee(
-        sizePush: 0,
-        damage: 0,
-        withPush: false,
-        size: Vector2(96, 96),
-        animationRight: GameSpriteSheet.dashEffect,
-        direction: lastDirection,
-      );
+      sizePush: 0,
+      damage: 0,
+      withPush: false,
+      size: Vector2(96, 96),
+      animationRight: GameSpriteSheet.dashEffect,
+      direction: lastDirection,
+    );
     Vector2 initPosition = gameRef.player?.position.gg ?? Vector2(0, 0);
 
     Vector2 startPosition = initPosition + Vector2.zero();
@@ -158,7 +192,6 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
             turnOffAnimation();
             return;
           case OneTimeAnimations.acquiredHammer:
-            equipWeapon();
             turnOffAnimation();
             Future.delayed(Duration(milliseconds: 250), () {
               // animation?.playOnce(GameSpriteSheet.equippingHammer);
@@ -175,12 +208,6 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
 
   void turnOffAnimation() {
     localGameController.turnOffAnimation();
-  }
-
-  void equipWeapon() {
-    // replaceAnimation(communistArmedBlacksmith);
-    damage = 20;
-    damageType = DamageType.FIRE;
   }
 
   @override
