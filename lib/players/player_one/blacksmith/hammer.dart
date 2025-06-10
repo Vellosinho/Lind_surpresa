@@ -13,40 +13,40 @@ mixin Hammer on LitPlayer {
   bool holdReady = true;
 
   void hammerAttack(JoystickActionEvent event) {
-    if ((damage ?? 5) >= 20) {
-      // if(event.id.keyId == LogicalKeyboardKey.keyZ.keyId && holdReady && event.event == ActionEvent.DOWN) {
-      if (event.id.keyId == LogicalKeyboardKey.keyZ.keyId) {
-        if (event.event == ActionEvent.DOWN && holdReady) {
-          holdHits = 0;
-          attackHold = true;
-          Future.delayed(Duration(milliseconds: 300), () {
-            if (attackHold) {
-              setupElementalLighting(width * 1.2);
-              replaceAnimation(spinningBlacksmithAttack);
-              holdAttackUsed = true;
-              holdReady = false;
-              spinAttack();
-            }
-          });
-        } else if (event.event == ActionEvent.UP) {
-          attackHold = false;
-          if (holdAttackUsed) {
-            setupElementalLighting(0);
-            holdReady = false;
-            replaceAnimation(communistArmedBlacksmith);
-            holdAttackUsed = false;
-          } else {
-            if (attackReady) {
-              simpleHit();
-            }
-          }
-        }
-      }
-    } else {
-      if (attackReady) {
-        simpleHit();
-      }
-    }
+    // if ((damage ?? 5) >= 20) {
+    //   // if(event.id.keyId == LogicalKeyboardKey.keyZ.keyId && holdReady && event.event == ActionEvent.DOWN) {
+    //   if (event.id.keyId == LogicalKeyboardKey.keyZ.keyId) {
+    //     if (event.event == ActionEvent.DOWN && holdReady) {
+    //       holdHits = 0;
+    //       attackHold = true;
+    //       Future.delayed(Duration(milliseconds: 300), () {
+    //         if (attackHold) {
+    //           setupElementalLighting(width * 1.2);
+    //           replaceAnimation(spinningBlacksmithAttack);
+    //           holdAttackUsed = true;
+    //           holdReady = false;
+    //           spinAttack();
+    //         }
+    //       });
+    //     } else if (event.event == ActionEvent.UP) {
+    //       attackHold = false;
+    //       if (holdAttackUsed) {
+    //         setupElementalLighting(0);
+    //         holdReady = false;
+    //         replaceAnimation(communistArmedBlacksmith);
+    //         holdAttackUsed = false;
+    //       } else {
+    //         if (attackReady) {
+    //           simpleHit();
+    //         }
+    //       }
+    //     }
+    //   }
+    // } else {
+    //   if (attackReady) {
+    //     simpleHit();
+    //   }
+    // }
   }
 
   void spinAttack() {
@@ -69,7 +69,7 @@ mixin Hammer on LitPlayer {
       } else {
         holdReady = false;
         setupElementalLighting(0);
-        replaceAnimation(communistArmedBlacksmith);
+        // replaceAnimation(communistArmedBlacksmith);
         Future.delayed(Duration(seconds: 10), () {
           holdReady = true;
         });

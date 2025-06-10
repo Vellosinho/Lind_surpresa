@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_gbb_demo/game/controller/npc_controller.dart';
 import 'package:projeto_gbb_demo/players/player_consts.dart';
 import 'package:provider/provider.dart';
 // import 'package:window_manager/window_manager.dart';
@@ -14,8 +13,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => LocalGameController(),),
-        ChangeNotifierProvider(create: (_) => PlayerConsts(),),
-        ChangeNotifierProvider(create: (_) => NPCController(),),
+        ChangeNotifierProvider(create: (_) => PlayerConsts(),)
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

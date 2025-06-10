@@ -6,179 +6,53 @@ import 'enum/character_faction.dart';
 
 
 class GameSpriteSheet {
-  // Communist Sprites
-
-  // Blacksmith
-
-  // One Time animations
-  static Future<SpriteAnimation> get forgeSuccessful => SpriteAnimation.load(
-    'communist/blacksmith/blacksmith_sword_complete.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.15, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get forgeLegedarySuccessful => SpriteAnimation.load(
-    'communist/blacksmith/blacksmith_legendary_sword_complete.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.15, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get acquiredIron => SpriteAnimation.load(
-    'communist/blacksmith/blacksmith_iron_acquired.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.15, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get equippingHammer => SpriteAnimation.load(
-    'communist/blacksmith/blacksmith_equipping_hammer.png',
-    SpriteAnimationData.sequenced(amount: 7, stepTime: 0.2, textureSize: Vector2(32, 40))
-  );
-
-  // Armed
-  static Future<SpriteAnimation> get communistArmedBlacksmithShrug => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_shrug.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.2, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithIdleLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_idle_left.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithIdleRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_idle_right.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithIdleFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_idle_front.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithIdleBack => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_idle_back.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithWalkLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_walk_left.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithDashLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_dash_left.png',
-    SpriteAnimationData.sequenced(amount:4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithWalkRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_walk_right.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithDashRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_dash_right.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithWalkFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_walk_front.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithDashFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_dash_front.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithWalkBack => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_walk_back.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithDashBack => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_dash_back.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmedBlacksmithSpinAttack => SpriteAnimation.load(
-    'communist/blacksmith/armed/blacksmith_spin_attack.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-
-  // Armored
-  static Future<SpriteAnimation> get communistArmoredBlacksmithShrug => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_shrug.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.2, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithIdleLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_idle_left.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithIdleRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_idle_right.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithIdleFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_idle_front.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithWalkLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_walk_left.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithDashLeft => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_dash_left.png',
-    SpriteAnimationData.sequenced(amount:4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithWalkRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_walk_right.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithDashRight => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_dash_right.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithWalkFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_walk_front.png',
-    SpriteAnimationData.sequenced(amount: 6, stepTime: 0.1, textureSize: Vector2(32,40))
-  );
-  static Future<SpriteAnimation> get communistArmoredBlacksmithDashFront => SpriteAnimation.load(
-    'communist/blacksmith/armed/armored/blacksmith_dash_front.png',
-    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
-  );
-  
   // Unarmed
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithShrug => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_shrug.png',
-    SpriteAnimationData.sequenced(amount: 8, stepTime: 0.2, textureSize: Vector2(32, 40))
-  );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithIdleLeft => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_idle_left.png',
+  static Future<SpriteAnimation> get lindIdleLeft => SpriteAnimation.load(
+    'lind_sprites/lind_idle_left.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithIdleRight => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_idle_right.png',
+  static Future<SpriteAnimation> get lindIdleRight => SpriteAnimation.load(
+    'lind_sprites/lind_idle_right.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithIdleFront => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_idle_front.png',
+  static Future<SpriteAnimation> get lindIdleFront => SpriteAnimation.load(
+    'lind_sprites/lind_idle_front.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithIdleBack => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_idle_back.png',
+  static Future<SpriteAnimation> get lindIdleBack => SpriteAnimation.load(
+    'lind_sprites/lind_idle_back.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithWalkLeft => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_walk_left.png',
+  static Future<SpriteAnimation> get lindWalkLeft => SpriteAnimation.load(
+    'lind_sprites/lind_walk_left.png',
     SpriteAnimationData.sequenced(amount: 6, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithDashLeft => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_dash_left.png',
+  static Future<SpriteAnimation> get lindDashLeft => SpriteAnimation.load(
+    'lind_sprites/lind_dash_left.png',
     SpriteAnimationData.sequenced(amount:4, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithWalkRight => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_walk_right.png',
+  static Future<SpriteAnimation> get lindWalkRight => SpriteAnimation.load(
+    'lind_sprites/lind_walk_right.png',
     SpriteAnimationData.sequenced(amount: 6, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithDashRight => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_dash_right.png',
+  static Future<SpriteAnimation> get lindDashRight => SpriteAnimation.load(
+    'lind_sprites/lind_dash_right.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithWalkFront => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_walk_front.png',
+  static Future<SpriteAnimation> get lindWalkFront => SpriteAnimation.load(
+    'lind_sprites/lind_walk_front.png',
     SpriteAnimationData.sequenced(amount: 6, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithDashFront => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_dash_front.png',
+  static Future<SpriteAnimation> get lindDashFront => SpriteAnimation.load(
+    'lind_sprites/lind_dash_front.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithWalkBack => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_walk_back.png',
+  static Future<SpriteAnimation> get lindWalkBack => SpriteAnimation.load(
+    'lind_sprites/lind_walk_back.png',
     SpriteAnimationData.sequenced(amount: 6, stepTime: 0.075, textureSize: Vector2(32,40))
   );
-  static Future<SpriteAnimation> get communistUnarmedBlacksmithDashBack => SpriteAnimation.load(
-    'communist/blacksmith/unarmed/blacksmith_dash_back.png',
+  static Future<SpriteAnimation> get lindDashBack => SpriteAnimation.load(
+    'lind_sprites/lind_dash_back.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.075, textureSize: Vector2(32,40))
   );
   
@@ -208,100 +82,26 @@ class GameSpriteSheet {
   );
   
 }
-
-
-  SimpleDirectionAnimation spinningBlacksmithAttack = SimpleDirectionAnimation(
-    idleRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleDown: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleDownRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleDownLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runDown: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runDownLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runDownRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleUp: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleUpRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    idleUpLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runUp: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runUpRight: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-    runUpLeft: GameSpriteSheet.communistArmedBlacksmithSpinAttack,
-  );
-  SimpleDirectionAnimation communistArmoredBlacksmith = SimpleDirectionAnimation(
-    idleRight: GameSpriteSheet.communistArmoredBlacksmithIdleRight,
-    runRight: GameSpriteSheet.communistArmoredBlacksmithWalkRight,
-    idleLeft: GameSpriteSheet.communistArmoredBlacksmithIdleLeft,
-    runLeft: GameSpriteSheet.communistArmoredBlacksmithWalkLeft,
-    idleDown: GameSpriteSheet.communistArmoredBlacksmithIdleFront,
-    idleDownRight: GameSpriteSheet.communistArmoredBlacksmithIdleFront,
-    idleDownLeft: GameSpriteSheet.communistArmoredBlacksmithIdleFront,
-    runDown: GameSpriteSheet.communistArmoredBlacksmithWalkFront,
-    runDownLeft: GameSpriteSheet.communistArmoredBlacksmithWalkFront,
-    runDownRight: GameSpriteSheet.communistArmoredBlacksmithWalkFront,
-    idleUp: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    idleUpRight: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    idleUpLeft: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    runUp: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-    runUpRight: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-    runUpLeft: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-  );
-  SimpleDirectionAnimation communistArmedBlacksmith = SimpleDirectionAnimation(
-    idleRight: GameSpriteSheet.communistArmedBlacksmithIdleRight,
-    runRight: GameSpriteSheet.communistArmedBlacksmithWalkRight,
-    idleLeft: GameSpriteSheet.communistArmedBlacksmithIdleLeft,
-    runLeft: GameSpriteSheet.communistArmedBlacksmithWalkLeft,
-    idleDown: GameSpriteSheet.communistArmedBlacksmithIdleFront,
-    idleDownRight: GameSpriteSheet.communistArmedBlacksmithIdleFront,
-    idleDownLeft: GameSpriteSheet.communistArmedBlacksmithIdleFront,
-    runDown: GameSpriteSheet.communistArmedBlacksmithWalkFront,
-    runDownLeft: GameSpriteSheet.communistArmedBlacksmithWalkFront,
-    runDownRight: GameSpriteSheet.communistArmedBlacksmithWalkFront,
-    idleUp: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    idleUpRight: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    idleUpLeft: GameSpriteSheet.communistArmedBlacksmithIdleBack,
-    runUp: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-    runUpRight: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-    runUpLeft: GameSpriteSheet.communistArmedBlacksmithWalkBack,
-  );
   
-  SimpleDirectionAnimation communistUnarmedBlacksmith = SimpleDirectionAnimation(
-    idleRight: GameSpriteSheet.communistUnarmedBlacksmithIdleRight,
-    runRight: GameSpriteSheet.communistUnarmedBlacksmithWalkRight,
-    idleLeft: GameSpriteSheet.communistUnarmedBlacksmithIdleLeft,
-    runLeft: GameSpriteSheet.communistUnarmedBlacksmithWalkLeft,
-    idleDown: GameSpriteSheet.communistUnarmedBlacksmithIdleFront,
-    idleDownRight: GameSpriteSheet.communistUnarmedBlacksmithIdleFront,
-    idleDownLeft: GameSpriteSheet.communistUnarmedBlacksmithIdleFront,
-    runDown: GameSpriteSheet.communistUnarmedBlacksmithWalkFront,
-    runDownLeft: GameSpriteSheet.communistUnarmedBlacksmithWalkFront,
-    runDownRight: GameSpriteSheet.communistUnarmedBlacksmithWalkFront,
-    idleUp: GameSpriteSheet.communistUnarmedBlacksmithIdleBack,
-    idleUpRight: GameSpriteSheet.communistUnarmedBlacksmithIdleBack,
-    idleUpLeft: GameSpriteSheet.communistUnarmedBlacksmithIdleBack,
-    runUp: GameSpriteSheet.communistUnarmedBlacksmithWalkBack,
-    runUpRight: GameSpriteSheet.communistUnarmedBlacksmithWalkBack,
-    runUpLeft: GameSpriteSheet.communistUnarmedBlacksmithWalkBack,
+  SimpleDirectionAnimation lind = SimpleDirectionAnimation(
+    idleRight: GameSpriteSheet.lindIdleRight,
+    runRight: GameSpriteSheet.lindWalkRight,
+    idleLeft: GameSpriteSheet.lindIdleLeft,
+    runLeft: GameSpriteSheet.lindWalkLeft,
+    idleDown: GameSpriteSheet.lindIdleFront,
+    idleDownRight: GameSpriteSheet.lindIdleFront,
+    idleDownLeft: GameSpriteSheet.lindIdleFront,
+    runDown: GameSpriteSheet.lindWalkFront,
+    runDownLeft: GameSpriteSheet.lindWalkFront,
+    runDownRight: GameSpriteSheet.lindWalkFront,
+    idleUp: GameSpriteSheet.lindIdleBack,
+    idleUpRight: GameSpriteSheet.lindIdleBack,
+    idleUpLeft: GameSpriteSheet.lindIdleBack,
+    runUp: GameSpriteSheet.lindWalkBack,
+    runUpRight: GameSpriteSheet.lindWalkBack,
+    runUpLeft: GameSpriteSheet.lindWalkBack,
   );
 
-  SimpleDirectionAnimation getAnimations(CharacterClass classe, CharacterFaction faction) {
-    switch (classe) {
-      case CharacterClass.Archer:
-        return getArcherAnimations(faction);
-      default:
-        return getArcherAnimations(faction);
-
-    }
-  }
-
-  SimpleDirectionAnimation getArcherAnimations(CharacterFaction faction) {
-    switch (faction) {
-      case CharacterFaction.Communist:
-        return communistArmedBlacksmith;
-      default:
-        return communistArmedBlacksmith;
-    }
-  }
 
 class InterfaceSpriteSheet {
   //Tokens

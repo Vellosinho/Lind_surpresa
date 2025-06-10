@@ -33,10 +33,7 @@ flutter:
     # - assets/images/abilities/
 
     - assets/images/
-    - assets/images/tutorialNPCs/
-    - assets/images/tutorialNPCs/tutorial_farmer/neutral_farmer/
-    - assets/images/tutorialNPCs/tutorial_farmer/communist_farmer/
-    - assets/images/tutorialNPCs/tutorial_farmer/neutral_shepard/
+    - assets/images/lind_sprites/
     - assets/images/objects/
     - assets/images/objects/anvil_minigame/
     - assets/images/objects/launch_station/
@@ -47,8 +44,6 @@ flutter:
     - assets/images/communist/blacksmith/armed/
     - assets/images/communist/blacksmith/armed/armored/
     - assets/images/communist/blacksmith/unarmed/
-    - assets/images/capitalist/
-    - assets/images/loyalist/
     - assets/images/map/
     - assets/images/map/house_interior/yellow_house/
     - assets/images/items/
@@ -59,7 +54,6 @@ flutter:
     - assets/images/interface/minimap/
     - assets/images/background/
     - assets/images/attack_sprites/
-    - assets/images/minigame/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

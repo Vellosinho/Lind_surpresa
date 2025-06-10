@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:projeto_gbb_demo/game.dart';
 import 'package:projeto_gbb_demo/game/controller/game_controller.dart';
 import 'package:projeto_gbb_demo/game/enum/character_faction.dart';
-import 'package:projeto_gbb_demo/game/game_sprite_sheet.dart';
+// import 'package:projeto_gbb_demo/game/game_sprite_sheet.dart';
 import 'package:projeto_gbb_demo/game/interface/player_interface.dart';
 import 'package:projeto_gbb_demo/game/objects/daytime_clock.dart';
 import 'package:projeto_gbb_demo/game/objects/objects.dart';
@@ -35,7 +35,7 @@ class _TownMapState extends State<TownMap> {
   @override
   void initState() {
     playerFaction = context.read<PlayerConsts>().faccao;
-    playerOneAnimations = getAnimations(playerOneClass, playerFaction);
+    // playerOneAnimations = getAnimations(playerOneClass, playerFaction);
     id = const Uuid().v1();
     super.initState();
   }

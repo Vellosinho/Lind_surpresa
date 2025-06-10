@@ -32,7 +32,7 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     playerFaction = context.read<PlayerConsts>().faccao;
-    playerOneAnimations = getAnimations(playerOneClass, playerFaction);
+    // playerOneAnimations = getAnimations(playerOneClass, playerFaction);
     id = const Uuid().v1();
     context.read<LocalGameController>().startDaynightCycle();
     // gameController = GameController();

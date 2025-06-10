@@ -43,7 +43,7 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
           life: playerLife,
           initDirection: Direction.down,
           size: PlayerConsts.characterSize,
-          animation: communistUnarmedBlacksmith,
+          animation: lind,
           // speed: PlayerConsts.characterSpeed,
           speed: PlayerConsts.characterSpeed,
         );
@@ -118,11 +118,11 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
       lastDirection.toRadians(),
     );
 
-    animation?.playOnce(isArmed
-        ? playerOneAnimations
-            .getArmedAnimation(lastDirection.toRadians().toString())
-        : playerOneAnimations
-            .getUnarmedAnimation(lastDirection.toRadians().toString()));
+    // animation?.playOnce(isArmed
+    //     ? playerOneAnimations
+    //         // .getArmedAnimation(lastDirection.toRadians().toString())
+    //     : playerOneAnimations
+    //         .getUnarmedAnimation(lastDirection.toRadians().toString()));
 
     translate(diffBase);
     dashReady = false;
@@ -140,28 +140,28 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
       Future.delayed(Duration(milliseconds: 0), () {
         switch (localGameController.playAnimation) {
           case OneTimeAnimations.swordComplete:
-            animation?.playOnce(GameSpriteSheet.forgeSuccessful);
+            // animation?.playOnce(GameSpriteSheet.forgeSuccessful);
             turnOffAnimation();
             return;
           case OneTimeAnimations.perfectSwordComplete:
-            animation?.playOnce(GameSpriteSheet.forgeLegedarySuccessful);
+            // animation?.playOnce(GameSpriteSheet.forgeLegedarySuccessful);
             turnOffAnimation();
             return;
           case OneTimeAnimations.acquiredIron:
-            animation?.playOnce(GameSpriteSheet.acquiredIron);
+            // animation?.playOnce(GameSpriteSheet.acquiredIron);
             turnOffAnimation();
             return;
           case OneTimeAnimations.shrug:
-            animation?.playOnce(isArmed
-                ? GameSpriteSheet.communistArmedBlacksmithShrug
-                : GameSpriteSheet.communistUnarmedBlacksmithShrug);
+            // animation?.playOnce(isArmed
+            //     ? GameSpriteSheet.communistArmedBlacksmithShrug
+            //     : GameSpriteSheet.communistUnarmedBlacksmithShrug);
             turnOffAnimation();
             return;
           case OneTimeAnimations.acquiredHammer:
             equipWeapon();
             turnOffAnimation();
             Future.delayed(Duration(milliseconds: 250), () {
-              animation?.playOnce(GameSpriteSheet.equippingHammer);
+              // animation?.playOnce(GameSpriteSheet.equippingHammer);
               speed = PlayerConsts.slowCharacterSpeed;
               animation?.play(SimpleAnimationEnum.idleDown);
             });
@@ -178,7 +178,7 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision, Hammer {
   }
 
   void equipWeapon() {
-    replaceAnimation(communistArmedBlacksmith);
+    // replaceAnimation(communistArmedBlacksmith);
     damage = 20;
     damageType = DamageType.FIRE;
   }
