@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_gbb_demo/game/enum/one_time_animations.dart';
 import 'package:projeto_gbb_demo/game/controller/game_controller.dart';
-import 'package:projeto_gbb_demo/players/player_one/player_one_animations.dart';
 
-import '../../../game/enum/character_faction.dart';
-import '../../../game/game_sprite_sheet.dart';
-import '../../player_consts.dart';
+import '../game/enum/character_faction.dart';
+import '../game/game_sprite_sheet.dart';
+import 'player_consts.dart';
 import 'package:bonfire/player/lit_player.dart';
 
 /* 
@@ -17,24 +15,23 @@ import 'package:bonfire/player/lit_player.dart';
   static Vector2 characterHitbox = Vector2(96, 40);
 */
 
-class BlacksmithClass extends LitPlayer with BlockMovementCollision {
+class Lind extends LitPlayer with BlockMovementCollision {
   Function onHit;
   double playerLife;
-  PlayerOneAnimations playerOneAnimations = PlayerOneAnimations();
 
   // control booleans:
   bool dashReady = true;
   bool attackReady = true;
   bool holdingArrow = false;
 
-  int arrowStrength = 0;
+  int arrowStrength = 1;
 
   LocalGameController localGameController;
 
   bool _isPlayingOneTimeAnimation = false;
 
   final String id;
-  BlacksmithClass({
+  Lind({
     required super.position,
     required this.onHit,
     required this.playerLife,
@@ -71,8 +68,6 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
 
   @override
   void update(double dt) {
-    localGameController.checkMinigameDistance(position);
-    playOneTimeAnimations();
     _isPlayingOneTimeAnimation =
         localGameController.playAnimation != OneTimeAnimations.none;
     super.update(dt);
@@ -82,24 +77,15 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
     if ((event.id.keyId == LogicalKeyboardKey.keyZ.keyId) && attackReady) {
       if (event.event == ActionEvent.DOWN) {
         holdingArrow = true;
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(milliseconds: 750), () {
           increasePullStrength();
         });
       } else {
         releaseArrow();
       }
-
-      // simpleAttackRangeByDirection(animationRight: GameSpriteSheet.arrowHorizontalRight,
-      //   attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
-      //   direction: lastDirection,
-      //   size: Vector2(155,95),
-      //   speed: 2000,
-      //   centerOffset: Vector2(0, -60)
-      // );
-      attackReady = false;
-      Future.delayed(const Duration(seconds: 2), () {
-        attackReady = true;
-      });
+    }
+    if (event.id.keyId == LogicalKeyboardKey.keyC.keyId && event.event == ActionEvent.DOWN) {
+      simpleAttackMelee(damage: 0, size: size, withPush: false);
     }
     if (event.id.keyId == LogicalKeyboardKey.keyX.keyId &&
         dashReady &&
@@ -113,7 +99,7 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
       print("current strength: $arrowStrength");
       if (arrowStrength < 3) {
         arrowStrength++;
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(milliseconds: 750), () {
           increasePullStrength();
         });
       }
@@ -121,16 +107,22 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
   }
 
   void releaseArrow() {
-    simpleAttackRangeByDirection(
-        animationRight: GameSpriteSheet.arrowHorizontalRight,
-        damage: (5 * arrowStrength).toDouble(),
-        attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
-        direction: lastDirection,
-        size: Vector2(155, 95),
-        speed: (1000 * arrowStrength).toDouble(),
-        centerOffset: Vector2(0, -60));
-    arrowStrength = 0;
-    holdingArrow = false;
+    if(holdingArrow) {
+      simpleAttackRangeByDirection(
+          animationRight: GameSpriteSheet.arrowHorizontalRight,
+          damage: (5 * arrowStrength).toDouble(),
+          attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
+          direction: lastDirection,
+          size: Vector2(155, 95),
+          speed: (1000 * arrowStrength).toDouble(),
+          centerOffset: Vector2(0, -60));
+      arrowStrength = 1;
+      holdingArrow = false;
+      attackReady = false;
+      Future.delayed(const Duration(seconds: 2), () {
+        attackReady = true;
+      });
+    }
   }
 
   void swordsmanDash() {
@@ -154,7 +146,7 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
 
     // animation?.playOnce(isArmed
     //     ? playerOneAnimations
-    //         // .getArmedAnimation(lastDirection.toRadians().toString())
+            // .getArmedAnimation(lastDirection.toRadians().toString())
     //     : playerOneAnimations
     //         .getUnarmedAnimation(lastDirection.toRadians().toString()));
 
@@ -163,51 +155,6 @@ class BlacksmithClass extends LitPlayer with BlockMovementCollision {
     Future.delayed(const Duration(seconds: 2), () {
       dashReady = true;
     });
-  }
-
-  void playOneTimeAnimations() {
-    if (localGameController.resetColision) {
-      setupColisions();
-      localGameController.toggleResetCollision();
-    }
-    if (localGameController.playAnimation != OneTimeAnimations.none) {
-      Future.delayed(Duration(milliseconds: 0), () {
-        switch (localGameController.playAnimation) {
-          case OneTimeAnimations.swordComplete:
-            // animation?.playOnce(GameSpriteSheet.forgeSuccessful);
-            turnOffAnimation();
-            return;
-          case OneTimeAnimations.perfectSwordComplete:
-            // animation?.playOnce(GameSpriteSheet.forgeLegedarySuccessful);
-            turnOffAnimation();
-            return;
-          case OneTimeAnimations.acquiredIron:
-            // animation?.playOnce(GameSpriteSheet.acquiredIron);
-            turnOffAnimation();
-            return;
-          case OneTimeAnimations.shrug:
-            // animation?.playOnce(isArmed
-            //     ? GameSpriteSheet.communistArmedBlacksmithShrug
-            //     : GameSpriteSheet.communistUnarmedBlacksmithShrug);
-            turnOffAnimation();
-            return;
-          case OneTimeAnimations.acquiredHammer:
-            turnOffAnimation();
-            Future.delayed(Duration(milliseconds: 250), () {
-              // animation?.playOnce(GameSpriteSheet.equippingHammer);
-              speed = PlayerConsts.slowCharacterSpeed;
-              animation?.play(SimpleAnimationEnum.idleDown);
-            });
-            return;
-          default:
-            return;
-        }
-      });
-    }
-  }
-
-  void turnOffAnimation() {
-    localGameController.turnOffAnimation();
   }
 
   @override

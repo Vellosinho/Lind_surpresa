@@ -34,16 +34,13 @@ flutter:
 
     - assets/images/
     - assets/images/lind_sprites/
+    - assets/images/cookie_sprites/
     - assets/images/objects/
     - assets/images/objects/anvil_minigame/
     - assets/images/objects/launch_station/
     - assets/images/objects/sword_box/
     - assets/images/objects/smithing_table/
     - assets/images/objects/wheat_fields/
-    - assets/images/communist/blacksmith/
-    - assets/images/communist/blacksmith/armed/
-    - assets/images/communist/blacksmith/armed/armored/
-    - assets/images/communist/blacksmith/unarmed/
     - assets/images/map/
     - assets/images/map/house_interior/yellow_house/
     - assets/images/items/

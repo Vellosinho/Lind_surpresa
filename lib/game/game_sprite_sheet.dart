@@ -106,6 +106,14 @@ class GameSpriteSheet {
     runUpLeft: GameSpriteSheet.lindWalkBack,
   );
 
+class CookieSprites {
+  
+  static Future<SpriteAnimation> get cookieSleep => SpriteAnimation.load(
+    'cookie_sprites/cookie_sleep.png',
+    SpriteAnimationData.sequenced(amount: 4, stepTime: 0.4, textureSize: Vector2(32,40))
+  );
+}
+
 
 class InterfaceSpriteSheet {
   //Tokens
@@ -204,7 +212,5 @@ class BackgroundImages {
 }
 
 class ItemSprites {
-  static Image get swordIcon => Image.asset('assets/images/items/forged_sword.png', height: 64, fit: BoxFit.cover);
-  static Image get legendarySwordIcon => Image.asset('assets/images/items/legendary_sword.png', height: 64, fit: BoxFit.cover);
-  static Image get ironBarIcon => Image.asset('assets/images/items/iron_bar.png', height: 64, fit: BoxFit.cover);
+  static Image get logIcon => Image.asset('assets/images/items/log.png', height: 64, fit: BoxFit.cover);
 }

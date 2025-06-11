@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:projeto_gbb_demo/game/enum/enum_day_time.dart';
 import 'package:projeto_gbb_demo/game/enum/one_time_animations.dart';
 import 'package:projeto_gbb_demo/game/items/base_item.dart';
-import 'package:projeto_gbb_demo/game/items/iron_item.dart';
-import 'package:projeto_gbb_demo/game/items/sword_item.dart';
-import 'dart:math';
+import 'package:projeto_gbb_demo/game/items/log.dart';
 
 class LocalGameController with ChangeNotifier {
-  int hour = 06;
+  int hour = 19;
   // int hour = 6
   int minute = 00;
 
@@ -101,107 +99,24 @@ class LocalGameController with ChangeNotifier {
     notifyListeners();
   }
 
-  bool getIron(ironCount) {
-    if (!isInventoryFull() && (ironCount > 0)) {
-      addToInventory(IronBar());
-      stashedIron--;
-      _playAnimation = OneTimeAnimations.acquiredIron;
+  void getLog() {
+    if (!isInventoryFull()) {
+      addToInventory(Log());
       notifyListeners();
+    }
+  }
+
+  bool addLogToFire() {
+    if(hasLog()) {
+      removeFromInventory(Log());
       return true;
     } else {
-      shrugPlayer();
-      notifyListeners();
       return false;
     }
   }
 
-  // Smithing Table functions:
-
-  void getWeapon() {
-    _playAnimation = OneTimeAnimations.acquiredHammer;
-    notifyListeners();
-  }
-
-  // Anvil functions:
-
-  void startMinigame(Vector2 pos, double damage) {
-    if (hasIron() && damage >= 15) {
-      removeFromInventory(IronBar());
-      minigameHitCount = 0;
-      swordScore = 0;
-      minigameIsActive = true;
-      minigamePos = pos;
-      startGameLoopCounter();
-      notifyListeners();
-    } else {
-      shrugPlayer();
-    }
-  }
-
-  void miniGameHit() {
-    if (minigameHitCount < 4) {
-      setSwordScore(sin(timeCount));
-      minigameHitCount++;
-    } else {
-      setSwordScore(sin(timeCount));
-      if (swordScore >= 170) {
-        _playAnimation = (swordScore == 250)
-            ? OneTimeAnimations.perfectSwordComplete
-            : OneTimeAnimations.swordComplete;
-        // swords.add(ForgedSword(swordScore: swordScore, isLegendary: (swordScore == 250)));
-        addToInventory(Sword(isLegenday: swordScore >= 250));
-      }
-      minigameIsActive = false;
-    }
-    notifyListeners();
-  }
-
-  void checkMinigameDistance(Vector2 currentPosition) {
-    if (minigameIsActive) {
-      if (((currentPosition.x - minigamePos.x > 320) ||
-              (currentPosition.x - minigamePos.x < -320)) ||
-          ((currentPosition.y - minigamePos.y > 320) ||
-              (currentPosition.y - minigamePos.y < -320))) {
-        cancelMinigame();
-        notifyListeners();
-      }
-    }
-  }
-
-  void cancelMinigame() {
-    minigameIsActive = false;
-    notifyListeners;
-  }
-
-  void turnOffAnimation() {
-    _playAnimation = OneTimeAnimations.none;
-    notifyListeners();
-  }
-
-  Future<void> startGameLoopCounter() async {
-    Random rand = Random();
-    double randVelocity = (rand.nextInt(75) + 50) / 1000;
-    timeCount = 0;
-    while (minigameIsActive) {
-      await Future.delayed(const Duration(milliseconds: 25), () {
-        timeCount = timeCount + randVelocity; //Increment Counter
-      });
-      notifyListeners();
-    }
-  }
-
-  void setSwordScore(double value) {
-    if (value < 0) {
-      value = value * -1;
-    }
-
-    if (value > 0.45) {
-      swordScore += 10;
-    } else if (value > 0.15) {
-      swordScore += 25;
-    } else {
-      swordScore += 50;
-    }
+  void endGame() {
+    print("Game is Over");
   }
 
   int getTime() {
@@ -239,14 +154,14 @@ class LocalGameController with ChangeNotifier {
     notifyListeners();
   }
 
-  bool hasIron() {
-    bool hasIron = false;
+  bool hasLog() {
+    bool hasLog = false;
     for (int i = 0; i < 4; i++) {
-      if (_inventory[i].name == 'ironBar') {
-        hasIron = true;
+      if (_inventory[i].name == 'log') {
+        hasLog = true;
       }
     }
-    return hasIron;
+    return hasLog;
   }
 
   bool isInventoryFull() {

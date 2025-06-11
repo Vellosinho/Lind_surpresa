@@ -9,11 +9,11 @@ import 'package:projeto_gbb_demo/game/enum/character_faction.dart';
 import 'package:projeto_gbb_demo/game/interface/player_interface.dart';
 import 'package:projeto_gbb_demo/game/objects/daytime_clock.dart';
 import 'package:projeto_gbb_demo/game/objects/objects.dart';
-import 'package:projeto_gbb_demo/game/objects/plants/wheat_field.dart';
 import 'package:projeto_gbb_demo/parallax/parallax_clouds.dart';
+import 'package:projeto_gbb_demo/players/cookie.dart';
 import 'package:projeto_gbb_demo/players/player_consts.dart';
 import 'package:projeto_gbb_demo/forge_minigame/minigame.dart';
-import 'package:projeto_gbb_demo/players/player_one/blacksmith/blacksmith.dart';
+import 'package:projeto_gbb_demo/players/lind.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
@@ -45,7 +45,7 @@ class _TownMapState extends State<TownMap> {
     
   double tileSize = 192;
     LocalGameController gameController = context.read<LocalGameController>();
-    LitPlayer player = BlacksmithClass(
+    LitPlayer player = Lind(
       localGameController: gameController,
       id: id,
       playerLife: context.watch<LocalGameController>().playerLife.toDouble(),
@@ -53,7 +53,7 @@ class _TownMapState extends State<TownMap> {
         gameController.hit(2);
       },
       faction: playerFaction,
-      position: Vector2(tileSize * 8, tileSize * 7),
+      position: Vector2(tileSize * 16, tileSize * 10),
     );
 
     return BonfireWidget(
@@ -75,24 +75,12 @@ class _TownMapState extends State<TownMap> {
       // widget.controller: widget.controller,
       lightingColorGame: Colors.orange[400]!.withAlpha(48),
       components: [
-        Anvil(
-            position: Vector2(tileSize * 21.5, tileSize * 19.5),
+        Bonfire(
+            position: Vector2(tileSize * 15, tileSize * 12.5),
             localGameController: widget.controller),
-        Furnace(
-            position: Vector2(tileSize * 21, tileSize * 11),
-            localGameController: widget.controller),
-        SwordShippingBox(
-            position: Vector2(tileSize * 19, tileSize * 18.5),
-            localGameController: widget.controller),
-        LaunchStation(
-            position: Vector2(tileSize * 14, tileSize * 13.5),
-            localGameController: widget.controller),
-        SmithingTable(
-            position: Vector2(tileSize * 22.75, tileSize * 16.85),
-            localGameController: widget.controller),
+        CookieNPC(position: Vector2(tileSize * 15, tileSize * 11), size: PlayerConsts.characterSize, hitboxSize: PlayerConsts.characterHitbox, hitboxPosition: PlayerConsts.characterHitboxPosition, controller: gameController),
         DayTimeClock(
             position: Vector2(0, 0), localGameController: widget.controller),
-        ...wheatField!,
       ],
       // ],
       cameraConfig: CameraConfig(zoom: 0.8, moveOnlyMapArea: true),
