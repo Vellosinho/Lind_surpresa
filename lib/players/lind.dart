@@ -24,8 +24,6 @@ class Lind extends LitPlayer with BlockMovementCollision {
   bool attackReady = true;
   bool holdingArrow = false;
 
-  int arrowStrength = 1;
-
   LocalGameController localGameController;
 
   bool _isPlayingOneTimeAnimation = false;
@@ -62,7 +60,7 @@ class Lind extends LitPlayer with BlockMovementCollision {
 
   @override
   void onJoystickAction(JoystickActionEvent event) {
-    swordsmanHitSet(event);
+    lindHitSet(event);
     return super.onJoystickAction(event);
   }
 
@@ -73,10 +71,11 @@ class Lind extends LitPlayer with BlockMovementCollision {
     super.update(dt);
   }
 
-  void swordsmanHitSet(JoystickActionEvent event) {
+  void lindHitSet(JoystickActionEvent event) {
     if ((event.id.keyId == LogicalKeyboardKey.keyZ.keyId) && attackReady) {
       if (event.event == ActionEvent.DOWN) {
         holdingArrow = true;
+        localGameController.setArrowStrength(1);
         Future.delayed(Duration(milliseconds: 750), () {
           increasePullStrength();
         });
@@ -90,15 +89,15 @@ class Lind extends LitPlayer with BlockMovementCollision {
     if (event.id.keyId == LogicalKeyboardKey.keyX.keyId &&
         dashReady &&
         !_isPlayingOneTimeAnimation) {
-      swordsmanDash();
+      lindDash();
     }
   }
 
   void increasePullStrength() {
     if (holdingArrow) {
-      print("current strength: $arrowStrength");
-      if (arrowStrength < 3) {
-        arrowStrength++;
+      if (localGameController.arrowStrength < 3) {
+        int value = localGameController.arrowStrength + 1;
+        localGameController.setArrowStrength(value);
         Future.delayed(Duration(milliseconds: 750), () {
           increasePullStrength();
         });
@@ -110,22 +109,22 @@ class Lind extends LitPlayer with BlockMovementCollision {
     if(holdingArrow) {
       simpleAttackRangeByDirection(
           animationRight: GameSpriteSheet.arrowHorizontalRight,
-          damage: (5 * arrowStrength).toDouble(),
+          damage: (26 * localGameController.arrowStrength).toDouble(),
           attackFrom: AttackOriginEnum.PLAYER_OR_ALLY,
           direction: lastDirection,
           size: Vector2(155, 95),
-          speed: (1000 * arrowStrength).toDouble(),
+          speed: (1000 * localGameController.arrowStrength).toDouble(),
           centerOffset: Vector2(0, -60));
-      arrowStrength = 1;
+      localGameController.setArrowStrength(0);
       holdingArrow = false;
       attackReady = false;
-      Future.delayed(const Duration(seconds: 2), () {
+      Future.delayed(const Duration(seconds: 1), () {
         attackReady = true;
       });
     }
   }
 
-  void swordsmanDash() {
+  void lindDash() {
     simpleAttackMelee(
       sizePush: 0,
       damage: 0,
@@ -155,6 +154,14 @@ class Lind extends LitPlayer with BlockMovementCollision {
     Future.delayed(const Duration(seconds: 2), () {
       dashReady = true;
     });
+  }
+
+  @override
+  void onDie() {
+    onRevive();
+    playerLife = 100;
+    localGameController.heal(100);
+    super.onDie();
   }
 
   @override

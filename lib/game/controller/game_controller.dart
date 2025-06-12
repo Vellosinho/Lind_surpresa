@@ -15,15 +15,15 @@ class LocalGameController with ChangeNotifier {
 
   Color mapTintColor = Colors.orange[400]!.withAlpha(48);
 
-  bool gameIsPaused = false;
-  bool minigameIsActive = false;
-  bool _resetColision = false;
-  bool get resetColision => _resetColision;
+  bool gameIsOver = false;
+  bool showBowDraw = false;
 
   double _playerLife = 100;
   int _playerWallet = 0;
   int _playerFollowers = 0;
   int _hitCount = 0;
+  int _arrowStrength = 0;
+
   final List<Item> _inventory = [
     Item(name: 'empty'),
     Item(name: 'empty'),
@@ -38,9 +38,12 @@ class LocalGameController with ChangeNotifier {
   int get playerWallet => _playerWallet;
   int get playerFollowers => _playerFollowers;
   int get hitcount => _hitCount;
+  int get arrowStrength => _arrowStrength;
 
   //Mini Game logic:
   int swordScore = 0;
+  int _logsOnBonfire = 0;
+  int get logsOnBonfire => _logsOnBonfire;
   int minigameHitCount = 0;
   double timeCount = 0.0;
   Vector2 minigamePos = Vector2(0, 0);
@@ -57,16 +60,6 @@ class LocalGameController with ChangeNotifier {
   void hit(double value) {
     _playerLife -= value;
     print("playerLife: $_playerLife");
-    notifyListeners();
-  }  
-  
-  void toggleResetCollision() {
-    _resetColision = !_resetColision;
-    notifyListeners();
-  }
-
-  void getMoney(int amount) {
-    _playerWallet += amount;
     notifyListeners();
   }
 
@@ -94,8 +87,8 @@ class LocalGameController with ChangeNotifier {
     });
   }
 
-  void togglePaused() {
-    gameIsPaused = !gameIsPaused;
+  void setGameOver() {
+    gameIsOver = true;
     notifyListeners();
   }
 
@@ -106,9 +99,15 @@ class LocalGameController with ChangeNotifier {
     }
   }
 
+  void setArrowStrength(int value) {
+    _arrowStrength = value;
+    notifyListeners();
+  }
+
   bool addLogToFire() {
-    if(hasLog()) {
+    if(hasLog() && !gameIsOver) {
       removeFromInventory(Log());
+      _logsOnBonfire++;
       return true;
     } else {
       return false;

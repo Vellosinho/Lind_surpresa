@@ -45,7 +45,7 @@ extension NpcExtensions on Npc {
   /// Checks whether the player is within range. If so, move to it.
   /// [visionAngle] in radians
   /// [angle] in radians. is automatically picked up using the component's direction.
-  Shape? seeAndMoveToPlayer({
+  Shape? seeAndMoveToPlayer(int i, {
     Function(Player)? closePlayer,
     // return true to stop move.
     BoolCallback? notObserved,

@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_gbb_demo/enemy/wooden_enemy.dart';
+import 'package:projeto_gbb_demo/game.dart';
 import 'package:projeto_gbb_demo/game/enum/enum_day_time.dart';
 import 'package:projeto_gbb_demo/game/controller/game_controller.dart';
 import 'package:projeto_gbb_demo/game/objects/object_sprites.dart';
+import 'package:projeto_gbb_demo/players/player_consts.dart';
 
 class DayTimeClock extends GameDecoration {
   LocalGameController localGameController;
@@ -29,6 +34,7 @@ class DayTimeClock extends GameDecoration {
   // }
 
   void updateGameLighting() {
+      checkRandomEnemy();
     Future.delayed(Duration(seconds: 10), () {
       updateGameLighting();
     });
@@ -57,6 +63,21 @@ class DayTimeClock extends GameDecoration {
         default:
           return;
       }
+    }
+  }
+  
+  void checkRandomEnemy() {
+    if (((localGameController.hour > 18) || (localGameController.hour < 6)) && (!localGameController.gameIsOver)) {
+      Random rand = Random();
+      int randomX = rand.nextInt(20) + 5;
+      int randomY = rand.nextInt(17) + 8;
+      Vector2 randomPosition = Vector2(randomX * tileSize, randomY * tileSize); 
+      add(WoodenEnemy(
+        position: randomPosition,
+        size: PlayerConsts.characterSize, 
+        hitboxSize: PlayerConsts.characterHitbox, 
+        hitboxPosition: PlayerConsts.characterHitboxPosition, 
+        controller: localGameController));
     }
   }
 }

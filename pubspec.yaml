@@ -33,14 +33,11 @@ flutter:
     # - assets/images/abilities/
 
     - assets/images/
+    - assets/images/minigame/
     - assets/images/lind_sprites/
+    - assets/images/wooden_enemy/
     - assets/images/cookie_sprites/
     - assets/images/objects/
-    - assets/images/objects/anvil_minigame/
-    - assets/images/objects/launch_station/
-    - assets/images/objects/sword_box/
-    - assets/images/objects/smithing_table/
-    - assets/images/objects/wheat_fields/
     - assets/images/map/
     - assets/images/map/house_interior/yellow_house/
     - assets/images/items/

@@ -55,6 +55,9 @@ class Bonfire extends GameDecoration with Attackable {
     if (addLog) {
       logsOnBonfire++;
     }
+    if (logsOnBonfire >=25) {
+      localGameController.setGameOver();
+    }
     super.onReceiveDamage(attacker, 0, identify, damageType);
   }
 } 

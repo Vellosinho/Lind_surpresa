@@ -1,4 +1,5 @@
 import 'package:bonfire/bonfire.dart';
+import 'package:flutter/material.dart';
 import 'package:projeto_gbb_demo/game/controller/game_controller.dart';
 import 'package:projeto_gbb_demo/game/game_sprite_sheet.dart';
 
@@ -23,30 +24,34 @@ class CookieNPC extends SimpleAlly with Lighting {
               runRight: CookieSprites.cookieSleep,
             ),
             receivesAttackFrom: AcceptableAttackOriginEnum.ALL) {
-    // setupLighting(
-    //   LightingConfig(
-    //     radius: width * 1.25,
-    //     color: Colors.transparent,
-    //     blurBorder: 160, // this is a default value
-    //     // type: LightingType.circle, // this is a default value
-    //     // useComponentAngle: false, // this is a default value. When true light rotate together component when change `angle` param.
-    //   ),
-    // );
   }
 
   @override
   Future<void> onLoad() {
     add(RectangleHitbox(size: hitboxSize, position: hitboxPosition));
+    checkIfGameIsOver();
     return super.onLoad();
   }
 
   @override
   void onReceiveDamage(attacker, double damage, identify, damageType) {
-    if (willTalk) {
-      // TalkDialog.show(context, getCurrentLines(), style: const TextStyle(fontFamily: 'PressStart2P', fontSize: 24, height: 1.5));
-    }
-    willTalk = !willTalk;
     super.onReceiveDamage(attacker, 0, identify, damageType);
   }
 
+  void checkIfGameIsOver() {
+
+    if (controller.gameIsOver) {
+      endGame();
+    } else {
+      Future.delayed(Duration(seconds: 1), () {
+        checkIfGameIsOver();
+      });
+    }
+
+  }
+
+  void endGame() {
+    TalkDialog.show(context, [Say(text: [TextSpan(text: 'Meu amor por voce e como essa fogueira, queima mais forte a cada segundo, me aquece nos momentos mais frios da vida. Eu amo cada segundo que passo ao seu lado, cada memoria, cada palavra, pra sempre... \nFeliz dia dos namorados, minha vida'),])], style: const TextStyle(fontFamily: 'PressStart2P', fontSize: 24, height: 1.5));
+    // gameRef.camera.zoom = 0.2;
+  }
 }

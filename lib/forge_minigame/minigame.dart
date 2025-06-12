@@ -15,7 +15,7 @@ class MiniGame extends StatelessWidget {
     return Consumer<LocalGameController>(
       builder: (context, localGameController, _) => Scaffold(
         backgroundColor: Colors.red[900]!.withAlpha(0),
-        body: localGameController.minigameIsActive
+        body: (localGameController.arrowStrength > 0)
             ? Center(
                 child: SizedBox(
                     height: 400,
@@ -24,27 +24,7 @@ class MiniGame extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 80),
                       child: Stack(
                         children: [
-                          MinigameInterface.minigameBackground,
-                          Center(
-                              child: Transform.rotate(
-                                  angle:
-                                      90 + sin(localGameController.timeCount),
-                                  child: SizedBox(
-                                      height: 320,
-                                      width: 4,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          SizedBox(
-                                              height: 80,
-                                              width: 4,
-                                              child: DecoratedBox(
-                                                decoration: BoxDecoration(
-                                                    color: Colors.black),
-                                              )),
-                                        ],
-                                      )))),
+                          MinigameInterface.getBackground(localGameController.arrowStrength),
                           MinigameInterface.minigameDecoration,
                         ],
                         //   ),

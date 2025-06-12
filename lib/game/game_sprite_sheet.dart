@@ -107,7 +107,6 @@ class GameSpriteSheet {
   );
 
 class CookieSprites {
-  
   static Future<SpriteAnimation> get cookieSleep => SpriteAnimation.load(
     'cookie_sprites/cookie_sleep.png',
     SpriteAnimationData.sequenced(amount: 4, stepTime: 0.4, textureSize: Vector2(32,40))
@@ -203,8 +202,23 @@ List<Widget> getToken(CharacterClass characterClass, CharacterFaction faction) {
 }
 
 class MinigameInterface {
-  static Image get minigameBackground => Image.asset('assets/images/minigame/minigame.png',height: 400, fit: BoxFit.cover,);
+  static Image get bowLowDraw => Image.asset('assets/images/minigame/bow_low_draw.png',height: 400, fit: BoxFit.cover,);
+  static Image get bowMediumDraw => Image.asset('assets/images/minigame/bow_medium_draw.png',height: 400, fit: BoxFit.cover,);
+  static Image get bowFullDraw => Image.asset('assets/images/minigame/bow_full_draw.png',height: 400, fit: BoxFit.cover,);
   static Image get minigameDecoration => Image.asset('assets/images/minigame/minigame_decoration.png',height: 400, fit: BoxFit.cover,);
+
+  static Image getBackground(value) {
+    switch (value) {
+      case 1:
+        return bowLowDraw;
+      case 2:
+        return bowMediumDraw;
+      case 3:
+        return bowFullDraw;
+      default:
+        return bowLowDraw;
+    }
+  }
 }
 
 class BackgroundImages {
