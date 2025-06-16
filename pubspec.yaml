@@ -38,6 +38,7 @@ flutter:
     - assets/images/wooden_enemy/
     - assets/images/cookie_sprites/
     - assets/images/objects/
+    - assets/images/plants/
     - assets/images/map/
     - assets/images/map/house_interior/yellow_house/
     - assets/images/items/

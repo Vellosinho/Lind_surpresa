@@ -7,9 +7,14 @@ class GameObjectsSprites {
 
   static Future<Sprite> anvilMinigame = Sprite.load('objects/anvil_minigame.png');
 
-  // Smithing Table
-  static Future<Sprite> smithingTableEmpty = Sprite.load('objects/smithing_table/empty_smithing_table.png');
-  static Future<Sprite> smithingTableHammer = Sprite.load('objects/smithing_table/hammer_smithing_table.png');
+  // Trees
+  static Future<Sprite> pine1 = Sprite.load('plants/pinheiro1.png');
+  static Future<Sprite> pine2 = Sprite.load('plants/pinheiro2.png');
+  static Future<Sprite> pine3 = Sprite.load('plants/pinheiro3.png');
+
+  // Tent
+  static Future<Sprite> tent = Sprite.load('ruins_village_map/tent.png');
+  static Future<Sprite> shack = Sprite.load('objects/shack.png');
   
   //furnace
   static Future<SpriteAnimation> get fire => SpriteAnimation.load(

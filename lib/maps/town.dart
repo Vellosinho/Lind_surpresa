@@ -42,8 +42,34 @@ class _TownMapState extends State<TownMap> {
   
   @override
   Widget build(BuildContext context) {
+    double tileSize = 192;
+
     
-  double tileSize = 192;
+    List<GameDecoration> forest = [
+      // Big Trees
+      PineTree(position: Vector2(tileSize * 15, tileSize * 74), localGameController: widget.controller),
+      PineTree(position: Vector2(tileSize * 21, tileSize * 74), localGameController: widget.controller),
+      PineTree(position: Vector2(tileSize * 24, tileSize * 72), localGameController: widget.controller),
+      PineTree(position: Vector2(tileSize * 27, tileSize * 83), localGameController: widget.controller),
+      PineTree(position: Vector2(tileSize * 31, tileSize * 87), localGameController: widget.controller),
+      PineTree(position: Vector2(tileSize * 33, tileSize * 84), localGameController: widget.controller),
+
+      // Medium Trees
+      PineTreeMedium(position: Vector2(tileSize * 17, tileSize * 75), localGameController: widget.controller),
+      PineTreeMedium(position: Vector2(tileSize * 25, tileSize * 74), localGameController: widget.controller),
+      PineTreeMedium(position: Vector2(tileSize * 26, tileSize * 77), localGameController: widget.controller),
+      PineTreeMedium(position: Vector2(tileSize * 25, tileSize * 85), localGameController: widget.controller),
+      PineTreeMedium(position: Vector2(tileSize * 29, tileSize * 82), localGameController: widget.controller),
+
+      PineTreeSmall(position: Vector2(tileSize * 20, tileSize * 73), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 24, tileSize * 75), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 21, tileSize * 71), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 23, tileSize * 70), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 29, tileSize * 85), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 33, tileSize * 86), localGameController: widget.controller),
+      PineTreeSmall(position: Vector2(tileSize * 35, tileSize * 83), localGameController: widget.controller),
+    ];
+    
     LocalGameController gameController = context.read<LocalGameController>();
     LitPlayer player = Lind(
       localGameController: gameController,
@@ -53,7 +79,7 @@ class _TownMapState extends State<TownMap> {
         gameController.hit(2);
       },
       faction: playerFaction,
-      position: Vector2(tileSize * 16, tileSize * 10),
+      position: Vector2(tileSize * 12, tileSize * 85),
     );
 
     return BonfireWidget(
@@ -76,16 +102,22 @@ class _TownMapState extends State<TownMap> {
       lightingColorGame: Colors.orange[400]!.withAlpha(48),
       components: [
         Bonfire(
-            position: Vector2(tileSize * 15, tileSize * 12.5),
+            position: Vector2(tileSize * 15.5, tileSize * 85),
             localGameController: widget.controller),
-        CookieNPC(position: Vector2(tileSize * 15, tileSize * 11), size: PlayerConsts.characterSize, hitboxSize: PlayerConsts.characterHitbox, hitboxPosition: PlayerConsts.characterHitboxPosition, controller: gameController),
+        Shack(position: Vector2(tileSize * 10, tileSize * 83)),
+        Tent(
+            position: Vector2(tileSize * 15, tileSize * 80),
+            localGameController: widget.controller),
+        CookieNPC(position: Vector2(tileSize * 15.5, tileSize * 83.5), size: PlayerConsts.characterSize, hitboxSize: PlayerConsts.characterHitbox, hitboxPosition: PlayerConsts.characterHitboxPosition, controller: gameController),
         DayTimeClock(
             position: Vector2(0, 0), localGameController: widget.controller),
+        ...forest
       ],
       // ],
+      // cameraConfig: CameraConfig(zoom: 0.1, moveOnlyMapArea: true),
       cameraConfig: CameraConfig(zoom: 0.8, moveOnlyMapArea: true),
       map: WorldMapByTiled(
-          WorldMapReader.fromAsset('ruins_village_map/ruins_map_pvp.json'),
+          WorldMapReader.fromAsset('ruins_village_map/snowy_hills.json'),
           forceTileSize: Vector2(tileSize, tileSize)),
       player: player,
       overlayBuilderMap: {
@@ -97,6 +129,7 @@ class _TownMapState extends State<TownMap> {
         PlayerInterface.overlayKey,
         MiniGame.overlayKey,
       ],
+      // showCollisionArea: true,
     );
   }
 }

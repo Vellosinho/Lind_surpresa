@@ -34,33 +34,36 @@ class DayTimeClock extends GameDecoration {
   // }
 
   void updateGameLighting() {
-      checkRandomEnemy();
+      // checkRandomEnemy();
     Future.delayed(Duration(seconds: 10), () {
       updateGameLighting();
     });
     if (localGameController.daytime != DayTime.same) {
       switch (localGameController.daytime) {
-        case DayTime.sunrise:
-          gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(48),
-              duration: Duration(seconds: 10));
-          localGameController.turnOffTimechange();
-          return;
-        case DayTime.noon:
-          gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(0),
-              duration: Duration(seconds: 10));
-          localGameController.turnOffTimechange();
-          return;
-        case DayTime.sunset:
-          gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(48),
-              duration: Duration(seconds: 10));
-          localGameController.turnOffTimechange();
-          return;
-        case DayTime.night:
-          gameRef.lighting!.animateToColor(Colors.indigo[900]!.withAlpha(148),
-              duration: Duration(seconds: 10));
-          localGameController.turnOffTimechange();
-          return;
+        // case DayTime.sunrise:
+        //   gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(48),
+        //       duration: Duration(seconds: 10));
+        //   localGameController.turnOffTimechange();
+        //   return;
+        // case DayTime.noon:
+        //   gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(0),
+        //       duration: Duration(seconds: 10));
+        //   localGameController.turnOffTimechange();
+        //   return;
+        // case DayTime.sunset:
+        //   gameRef.lighting!.animateToColor(Colors.orange[400]!.withAlpha(48),
+        //       duration: Duration(seconds: 10));
+        //   localGameController.turnOffTimechange();
+        //   return;
+        // case DayTime.night:
+        //   gameRef.lighting!.animateToColor(Colors.indigo[900]!.withAlpha(148),
+        //       duration: Duration(seconds: 10));
+        //   localGameController.turnOffTimechange();
+          // return;
         default:
+          gameRef.lighting!.animateToColor(Colors.indigo[900]!.withAlpha(0),
+              duration: Duration(seconds: 10));
+          localGameController.turnOffTimechange();
           return;
       }
     }
