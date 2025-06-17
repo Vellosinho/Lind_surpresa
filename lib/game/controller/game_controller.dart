@@ -11,6 +11,8 @@ class LocalGameController with ChangeNotifier {
   // int hour = 6
   int minute = 00;
 
+  int bonfireRemainingTime = 120;
+
   DayTime daytime = DayTime.same;
 
   Color mapTintColor = Colors.orange[400]!.withAlpha(48);
@@ -105,7 +107,7 @@ class LocalGameController with ChangeNotifier {
   }
 
   bool addLogToFire() {
-    if(hasLog() && !gameIsOver) {
+    if (hasLog() && !gameIsOver) {
       removeFromInventory(Log());
       _logsOnBonfire++;
       return true;
@@ -252,5 +254,11 @@ class LocalGameController with ChangeNotifier {
 
   void shrugPlayer() {
     _playAnimation = OneTimeAnimations.shrug;
+  }
+
+  void removeBonfireTime() {
+    bonfireRemainingTime--;
+    print(bonfireRemainingTime);
+    notifyListeners();
   }
 }

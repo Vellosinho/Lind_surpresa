@@ -11,7 +11,6 @@ import 'package:projeto_gbb_demo/players/player_consts.dart';
 
 class DayTimeClock extends GameDecoration {
   LocalGameController localGameController;
-  int stashedIron = 0;
   DayTimeClock({required super.position, required this.localGameController})
       : super.withSprite(sprite: GameObjectsSprites.anvil, size: Vector2(0, 0));
   @override
