@@ -8,7 +8,10 @@ class GameObjectsSprites {
   static Future<Sprite> anvilMinigame = Sprite.load('objects/anvil_minigame.png');
 
   // Trees
-  static Future<Sprite> pine1 = Sprite.load('plants/pinheiro1.png');
+  static Future<SpriteAnimation> get pine1 => SpriteAnimation.load('plants/pinheiro1.png', SpriteAnimationData.sequenced(amount: 1, stepTime: 0.2, textureSize: Vector2(160,160)));
+  static Future<SpriteAnimation> get pine1Hit => SpriteAnimation.load('plants/pinheiro1_hit.png', SpriteAnimationData.sequenced(amount: 4, stepTime: 0.2, textureSize: Vector2(160,160)));
+  static Future<SpriteAnimation> get pine1fall => SpriteAnimation.load('plants/pinheiro1_falling.png', SpriteAnimationData.sequenced(amount: 7, stepTime: 0.2, textureSize: Vector2(160,160)));
+  static Future<SpriteAnimation> get pine1cut => SpriteAnimation.load('plants/pinheiro1_cut.png', SpriteAnimationData.sequenced(amount: 1, stepTime: 0.2, textureSize: Vector2(160,160)));
   static Future<Sprite> pine2 = Sprite.load('plants/pinheiro2.png');
   static Future<Sprite> pine3 = Sprite.load('plants/pinheiro3.png');
 
@@ -20,5 +23,9 @@ class GameObjectsSprites {
   static Future<SpriteAnimation> get fire => SpriteAnimation.load(
     'objects/active_furnace.png',
     SpriteAnimationData.sequenced(amount: 8, stepTime: 0.2, textureSize: Vector2(32,32))
+  );
+  static Future<SpriteAnimation> get deadFire => SpriteAnimation.load(
+    'objects/bonfire_dead.png',
+    SpriteAnimationData.sequenced(amount: 1, stepTime: 0.2, textureSize: Vector2(32,32))
   );
 }

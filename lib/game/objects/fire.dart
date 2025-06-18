@@ -37,15 +37,20 @@ class Bonfire extends GameDecoration with Attackable {
     textComponent.text = '${(localGameController.bonfireRemainingTime ~/ 60).toString().padLeft(2, '0')}:${(localGameController.bonfireRemainingTime.remainder(60)).toString().padLeft(2, '0')}';
   }
 
-  void fireOscilation() {
-    updateTextWidget();
-    localGameController.removeBonfireTime();
-    Random rand = Random();
-    int random = rand.nextInt(25) + 125 + logsOnBonfire * 25;
-    updateLighting(radiusWidth: (random / 100));
-    Future.delayed(Duration(seconds: 1), () {
-      fireOscilation();
-    });
+  Future<void> fireOscilation() async {
+    if (localGameController.bonfireRemainingTime > 0) {
+      localGameController.removeBonfireTime();
+      updateTextWidget();
+      Random rand = Random();
+      int random = rand.nextInt(25) + 125 + logsOnBonfire * 25;
+      updateLighting(radiusWidth: (random / 100));
+      Future.delayed(Duration(seconds: 1), () {
+        fireOscilation();
+      });
+    } else {
+      setAnimation(await GameObjectsSprites.deadFire);
+      updateLighting(radiusWidth: 0);
+    }
   }
 
   void updateLighting({required double radiusWidth}) {

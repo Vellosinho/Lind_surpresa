@@ -8,7 +8,7 @@ class PineTree extends GameDecoration with Attackable {
   LocalGameController localGameController;
   PineTree({
     required super.position,required this.localGameController})
-      : super.withSprite(sprite: GameObjectsSprites.pine1, size: Vector2(576, 960)) 
+      : super.withAnimation(animation: GameObjectsSprites.pine1, size: Vector2(960, 960)) 
 ;    @override
     Future<void> onLoad() {
       add(RectangleHitbox(size:Vector2(72, 40), position: Vector2(224, 856),));
@@ -23,7 +23,17 @@ class PineTree extends GameDecoration with Attackable {
 
     @override
   void onReceiveDamage(AttackOriginEnum attacker, double damage, identify, DamageType damageType) {
-    super.onReceiveDamage(attacker, 0, identify, damageType);
+    playSpriteAnimationOnce(GameObjectsSprites.pine1Hit);
+    super.onReceiveDamage(attacker, 10, identify, damageType);
+  }
+
+  @override
+  Future<void> onDie() async {
+    localGameController.getLog();
+    playSpriteAnimationOnce(GameObjectsSprites.pine1fall, onFinish: () async {
+      setAnimation(await GameObjectsSprites.pine1cut);
+    });
+    super.onDie();
   }
 }
 
