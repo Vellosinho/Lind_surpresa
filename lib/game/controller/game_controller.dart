@@ -11,7 +11,11 @@ class LocalGameController with ChangeNotifier {
   // int hour = 6
   int minute = 00;
 
-  int bonfireRemainingTime = 120;
+  int _bonfireRemainingTime = 120;
+  int get bonfireRemainingTime => _bonfireRemainingTime;
+
+  bool _fireDead = false;
+  bool get fireDead => _fireDead;
 
   DayTime daytime = DayTime.same;
 
@@ -106,14 +110,16 @@ class LocalGameController with ChangeNotifier {
     notifyListeners();
   }
 
-  bool addLogToFire() {
-    if (hasLog() && !gameIsOver) {
+  void addLogToFire() {
+    if (hasLog() && !_fireDead) {
       removeFromInventory(Log());
-      _logsOnBonfire++;
-      return true;
-    } else {
-      return false;
+      _bonfireRemainingTime += 30;
     }
+  }
+
+  void killFire() {
+    _fireDead = true;
+    notifyListeners();
   }
 
   void endGame() {
@@ -257,8 +263,7 @@ class LocalGameController with ChangeNotifier {
   }
 
   void removeBonfireTime() {
-    bonfireRemainingTime--;
-    print(bonfireRemainingTime);
+    _bonfireRemainingTime--;
     notifyListeners();
   }
 }
